@@ -1,0 +1,13 @@
+default: &default # storage: s3
+  storage: s3 # storage: s3 if you dont want to use s3 then use local
+  # storage: local
+  # path_prefix: tmp/files
+
+production:
+  <<: *default
+
+development:
+  <<: *default
+
+test:
+  <<: *default

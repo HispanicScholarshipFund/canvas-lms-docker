@@ -1,0 +1,12 @@
+default: &default
+  url:
+    - rediss://<%= ENV.fetch('REDIS_HOST') %> # rediss - with SSL if you dont have SSL use redis://
+
+production:
+  <<: *default
+
+development:
+  <<: *default
+
+test:
+  <<: *default
