@@ -58,27 +58,20 @@ jobs:
           jq -r '.SecretString' <<< $AWS_SECRET | jq -r 'keys[] as $k | "\($k)=\(.[$k])"' >> master_env_file
           cat master_env_file
           cp master_env_file .env
-          AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-          AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-          cat .env
-          AWS_REGION=${AWS_REGION}
           echo $AWS_ACCESS_KEY_ID >> .env
           echo $AWS_SECRET_ACCESS_KEY >> .env
           echo $AWS_REGION >> .env
 
-          # GATSBY_TENANT_VALUE=$(jq -r '.SecretString' <<< $AWS_SECRET | jq -r '.GATSBY_TENANT')
-          # echo "##vso[task.setvariable variable=GATSBY_TENANT;]$GATSBY_TENANT_VALUE"
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
-      # - name: Login to Amazon ECR
-      #   id: login-ecr
-      #   uses: aws-actions/amazon-ecr-login@v2
-
-      # - name: Build, tag, and push main service
-      #   id: build-image
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     REPOSITORY: canvas-app
-      #   run: |
-      #     docker compose build app
-      #     docker tag canvas-app:latest $ECR_REGISTRY/canvas-app:latest
-      #     docker push $ECR_REGISTRY/canvas-app:latest
+      - name: Build, tag, and push main service
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: canvas-app
+        run: |
+          docker compose build app
+          docker tag canvas-app:latest $ECR_REGISTRY/canvas-app:latest
+          docker push $ECR_REGISTRY/canvas-app:latest
