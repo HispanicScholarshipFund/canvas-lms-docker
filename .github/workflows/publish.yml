@@ -68,9 +68,6 @@ jobs:
 
           # GATSBY_TENANT_VALUE=$(jq -r '.SecretString' <<< $AWS_SECRET | jq -r '.GATSBY_TENANT')
           # echo "##vso[task.setvariable variable=GATSBY_TENANT;]$GATSBY_TENANT_VALUE"
-        env:
-          AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
-          AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
 
       # - name: Login to Amazon ECR
       #   id: login-ecr
