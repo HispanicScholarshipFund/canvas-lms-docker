@@ -5,6 +5,7 @@ services:
     ports:
       - 80:3000
     environment:
+      ADDITIONAL_ALLOWED_HOSTS: university.hsf.net
       CANVAS_LMS_DOMAIN: ${CANVAS_LMS_DOMAIN}
       CANVAS_LMS_ADMIN_EMAIL: ${CANVAS_LMS_ADMIN_EMAIL}
       CANVAS_LMS_ADMIN_PASSWORD: ${CANVAS_LMS_ADMIN_PASSWORD}
