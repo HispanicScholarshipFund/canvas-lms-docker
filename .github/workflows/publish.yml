@@ -55,9 +55,9 @@ jobs:
         run: |
           SECRET_NAME=PROD_HSF_CANVAS
           AWS_SECRET=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME)
-          jq -r '.SecretString' <<< $AWS_SECRET | jq -r 'keys[] as $k | "\($k)=\(.[$k])"' >> $(master_env_file)
-          cat $(master_env_file)
-          echo $(master_env_file) >> .env
+          jq -r '.SecretString' <<< $AWS_SECRET | jq -r 'keys[] as $k | "\($k)=\(.[$k])"' >> master_env_file
+          cat master_env_file
+          cp master_env_file .env
           AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
           AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
           cat .env
