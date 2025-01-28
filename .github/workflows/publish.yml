@@ -61,5 +61,6 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: canvas-app
         run: |
-          docker compose build -t $ECR_REGISTRY/canvas-app:latest .
+          docker compose build app
+          docker tag canvas-app:latest $ECR_REGISTRY/canvas-app:latest
           docker push $ECR_REGISTRY/canvas-app:latest
