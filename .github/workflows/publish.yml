@@ -34,7 +34,7 @@ jobs:
           template: ./cloudformation/ecr.yml
 
   deploy:
-    depends-on: cloudformation
+    needs: cloudformation
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
