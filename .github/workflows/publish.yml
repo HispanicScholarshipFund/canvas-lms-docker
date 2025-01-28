@@ -29,10 +29,10 @@ jobs:
       - name: Deploy CloudFormation stack
         id: ecr-stack
         uses: aws-actions/aws-cloudformation-github-deploy@v1
-        no-fail-on-empty-changeset: "1"
         with:
           name: canvas-app-ecr
           template: ./cloudformation/ecr.yml
+          no-fail-on-empty-changeset: "1"
 
   deploy:
     needs: cloudformation
