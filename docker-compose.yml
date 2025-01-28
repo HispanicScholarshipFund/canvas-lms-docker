@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: canvas-app
+    image: canvas-app
     build:
       context: .
     ports:
@@ -41,8 +41,8 @@ services:
         condition: service_started
 
   jobs:
-    container_name: canvas-jobs
     command: bundle exec script/delayed_job run
+    image: canvas-app
     build:
       context: .
     depends_on:
