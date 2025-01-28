@@ -48,6 +48,7 @@ This repositroy is an easy setup for Canvas LMS, with queues
   AWS_SECRET_ACCESS_KEY=
   AWS_REGION=
   AWS_S3_BUCKET=
+  ADDITIONAL_ALLOWED_HOSTS=
   TZ=CA/US
   COMPOSE_FILE=docker-compose.local.yml
   ```
