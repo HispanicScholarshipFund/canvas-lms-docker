@@ -9,7 +9,7 @@ FROM node:${NODE_VERSION}-alpine AS node
 FROM ruby:${RUBY_VERSION}-alpine AS builder
 
 ARG YARN_VERSION=1.22.22
-ARG GIT_BRANCH=master
+ARG GIT_BRANCH=prod
 ARG CANVAS_HOME
 
 COPY --link --from=node /usr/local/bin/node /usr/local/bin/
