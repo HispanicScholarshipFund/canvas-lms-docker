@@ -283,7 +283,7 @@ Resources:
     Properties:
       ContainerDefinitions:
         - Essential: true
-          Image: !Ref CanvasAppECRRepository
+          Image: "580472969326.dkr.ecr.us-west-1.amazonaws.com/canvas-app:latest"
           LogConfiguration:
             LogDriver: awslogs
             Options:
