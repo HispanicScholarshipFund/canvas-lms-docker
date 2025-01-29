@@ -283,7 +283,7 @@ Resources:
     Properties:
       ContainerDefinitions:
         - Essential: true
-          Image: !Ref CanvasAppRepositoryUri
+          Image: !Ref RepositoryUri
           LogConfiguration:
             LogDriver: awslogs
             Options:

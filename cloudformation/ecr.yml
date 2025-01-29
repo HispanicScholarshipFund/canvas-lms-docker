@@ -47,6 +47,6 @@ Resources:
               - "ecr:DeleteRepositoryPolicy"
 
 Outputs:
-  CanvasAppRepositoryUri:
+  RepositoryUri:
     Description: "URI of the created ECR repository"
     Value: !GetAtt CanvasAppECRRepository.RepositoryUri
