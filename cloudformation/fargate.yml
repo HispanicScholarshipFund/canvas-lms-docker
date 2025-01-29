@@ -283,7 +283,7 @@ Resources:
     Properties:
       ContainerDefinitions:
         - Essential: true
-          Image: "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest"
+          Image: !Ref CanvasAppRepositoryUri
           LogConfiguration:
             LogDriver: awslogs
             Options:
@@ -326,6 +326,12 @@ Resources:
     Properties:
       PolicyDocument:
         Statement:
+          - Action:
+              - 'ecr:GetDownloadUrlForLayer'
+              - 'ecr:BatchGetImage'
+              - 'ecr:BatchCheckLayerAvailability'
+            Resource: '*'
+            Effect: Allow
           - Action:
               - "logs:CreateLogStream"
               - "logs:PutLogEvents"
