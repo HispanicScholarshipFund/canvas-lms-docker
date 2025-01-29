@@ -94,6 +94,6 @@ jobs:
         id: ecr-stack
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: canvas-app-ecr
+          name: canvas-app-infra
           template: ./cloudformation/fargate.yml
           no-fail-on-empty-changeset: "1"
