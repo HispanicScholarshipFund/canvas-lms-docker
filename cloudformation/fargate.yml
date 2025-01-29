@@ -393,7 +393,7 @@ Resources:
   CanvasAPI:
     Type: "AWS::ApiGatewayV2::Api"
     Properties:
-      Name: canvas
+      Name: canvas-api
       ProtocolType: HTTP
   CanvasAPIANYproxylistener:
     Type: "AWS::ApiGatewayV2::Integration"
