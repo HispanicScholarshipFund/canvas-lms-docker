@@ -42,6 +42,17 @@ RUN git clone -b ${GIT_BRANCH} --depth 1 https://github.com/HispanicScholarshipF
 WORKDIR ${CANVAS_HOME}
 
 RUN <<EOF
+    pwd
+    cd vendor
+    git clone https://github.com/instructure/QTIMigrationTool.git QTIMigrationTool
+    ls 
+    cd QTIMigrationTool
+    chmod +x migrate.py
+    cd ../..
+EOF
+
+
+RUN <<EOF
 yarn config set network-timeout 600000
 yarn config set network-concurrency 1
 yarn install --pure-lockfile
@@ -139,7 +150,7 @@ apk add --no-cache \
     tzdata \
     xmlsec \
     yaml \
-    file
+    file 
 
 addgroup -g ${CANVAS_GROUP_ID} ${CANVAS_USER}
 adduser -D -G ${CANVAS_USER} -u ${CANVAS_USER_ID} -h ${CANVAS_HOME} ${CANVAS_USER}
