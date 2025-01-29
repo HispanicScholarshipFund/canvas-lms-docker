@@ -405,7 +405,7 @@ Resources:
       IntegrationMethod: ANY
       IntegrationUri: !Ref CanvasServiceLBPublicListener
       PayloadFormatVersion: "1.0"
-  CanvasAPIANYproxyE1641F8A:
+  CanvasAPIANYproxy:
     Type: "AWS::ApiGatewayV2::Route"
     Properties:
       ApiId: !Ref CanvasAPI
@@ -423,7 +423,7 @@ Resources:
         - !Ref CanvasVPCPrivateSubnet1Subnet
         - !Ref CanvasVPCPrivateSubnet2Subnet
       SecurityGroupIds: []
-  myLogGroup46524CAB:
+  CanvasLogGroup:
     Type: "AWS::Logs::LogGroup"
     Properties:
       RetentionInDays: 731
@@ -436,7 +436,7 @@ Resources:
       StageName: $default
       AccessLogSettings:
         DestinationArn: !GetAtt
-          - myLogGroup46524CAB
+          - CanvasLogGroup
           - Arn
         Format: >-
           $context.identity.sourceIp - - [$context.requestTime]
