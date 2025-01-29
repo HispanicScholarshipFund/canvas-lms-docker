@@ -1,5 +1,5 @@
 Resources:
-  CanvasVPC:
+  CanvasVPCD20D58E8:
     Type: "AWS::EC2::VPC"
     Properties:
       CidrBlock: 10.0.0.0/16
@@ -8,11 +8,11 @@ Resources:
       InstanceTenancy: default
       Tags:
         - Key: Name
-          Value: CanvasStack/CanvasVPC
-  CanvasVPCPublicSubnet1Subnet:
+          Value: PrivateIntegrationsStack/CanvasVPC
+  CanvasVPCPublicSubnet1SubnetBE0B3CBD:
     Type: "AWS::EC2::Subnet"
     Properties:
-      VpcId: !Ref CanvasVPC
+      VpcId: !Ref CanvasVPCD20D58E8
       AvailabilityZone: !Select
         - 0
         - !GetAZs ""
@@ -25,51 +25,51 @@ Resources:
           Value: Public
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PublicSubnet1
-  CanvasVPCPublicSubnet1RouteTable:
+            PrivateIntegrationsStack/CanvasVPC/PublicSubnet1
+  CanvasVPCPublicSubnet1RouteTableA63763CC:
     Type: "AWS::EC2::RouteTable"
     Properties:
-      VpcId: !Ref CanvasVPC
+      VpcId: !Ref CanvasVPCD20D58E8
       Tags:
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PublicSubnet1
-  CanvasVPCPublicSubnet1RouteTableAssociation:
+            PrivateIntegrationsStack/CanvasVPC/PublicSubnet1
+  CanvasVPCPublicSubnet1RouteTableAssociationFD6DF484:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
-      RouteTableId: !Ref CanvasVPCPublicSubnet1RouteTable
-      SubnetId: !Ref CanvasVPCPublicSubnet1Subnet
-  CanvasVPCPublicSubnet1DefaultRoute:
+      RouteTableId: !Ref CanvasVPCPublicSubnet1RouteTableA63763CC
+      SubnetId: !Ref CanvasVPCPublicSubnet1SubnetBE0B3CBD
+  CanvasVPCPublicSubnet1DefaultRouteD59FC1D2:
     Type: "AWS::EC2::Route"
     Properties:
-      RouteTableId: !Ref CanvasVPCPublicSubnet1RouteTable
+      RouteTableId: !Ref CanvasVPCPublicSubnet1RouteTableA63763CC
       DestinationCidrBlock: 0.0.0.0/0
-      GatewayId: !Ref CanvasVPC
+      GatewayId: !Ref CanvasVPCIGW3645F9D4
     DependsOn:
-      - CanvasVPCVPCGW
-  CanvasVPCPublicSubnet1:
+      - CanvasVPCVPCGW514A8E2A
+  CanvasVPCPublicSubnet1EIPD3DAF766:
     Type: "AWS::EC2::EIP"
     Properties:
       Domain: vpc
       Tags:
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PublicSubnet1
-  CanvasVPCPublicSubnet1NATGateway:
+            PrivateIntegrationsStack/CanvasVPC/PublicSubnet1
+  CanvasVPCPublicSubnet1NATGatewayC5702CC8:
     Type: "AWS::EC2::NatGateway"
     Properties:
-      SubnetId: !Ref CanvasVPCPublicSubnet1Subnet
+      SubnetId: !Ref CanvasVPCPublicSubnet1SubnetBE0B3CBD
       AllocationId: !GetAtt
-        - CanvasVPCPublicSubnet1
+        - CanvasVPCPublicSubnet1EIPD3DAF766
         - AllocationId
       Tags:
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PublicSubnet1
-  CanvasVPCPublicSubnet2Subnet2:
+            PrivateIntegrationsStack/CanvasVPC/PublicSubnet1
+  CanvasVPCPublicSubnet2Subnet26685AB7:
     Type: "AWS::EC2::Subnet"
     Properties:
-      VpcId: !Ref CanvasVPC
+      VpcId: !Ref CanvasVPCD20D58E8
       AvailabilityZone: !Select
         - 1
         - !GetAZs ""
@@ -82,51 +82,51 @@ Resources:
           Value: Public
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PublicSubnet2
-  CanvasVPCPublicSubnet2RouteTable:
+            PrivateIntegrationsStack/CanvasVPC/PublicSubnet2
+  CanvasVPCPublicSubnet2RouteTable356B306D:
     Type: "AWS::EC2::RouteTable"
     Properties:
-      VpcId: !Ref CanvasVPC
+      VpcId: !Ref CanvasVPCD20D58E8
       Tags:
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PublicSubnet2
-  CanvasVPCPublicSubnet2RouteTableAssociation:
+            PrivateIntegrationsStack/CanvasVPC/PublicSubnet2
+  CanvasVPCPublicSubnet2RouteTableAssociation1035F5D0:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
-      RouteTableId: !Ref CanvasVPCPublicSubnet2RouteTable
-      SubnetId: !Ref CanvasVPCPublicSubnet2Subnet2
-  CanvasVPCPublicSubnet2DefaultRoute:
+      RouteTableId: !Ref CanvasVPCPublicSubnet2RouteTable356B306D
+      SubnetId: !Ref CanvasVPCPublicSubnet2Subnet26685AB7
+  CanvasVPCPublicSubnet2DefaultRoute4AB2237D:
     Type: "AWS::EC2::Route"
     Properties:
-      RouteTableId: !Ref CanvasVPCPublicSubnet2RouteTable
+      RouteTableId: !Ref CanvasVPCPublicSubnet2RouteTable356B306D
       DestinationCidrBlock: 0.0.0.0/0
-      GatewayId: !Ref CanvasVPC
+      GatewayId: !Ref CanvasVPCIGW3645F9D4
     DependsOn:
-      - CanvasVPCVPCGW
-  CanvasVPCPublicSubnet2:
+      - CanvasVPCVPCGW514A8E2A
+  CanvasVPCPublicSubnet2EIP40226FDB:
     Type: "AWS::EC2::EIP"
     Properties:
       Domain: vpc
       Tags:
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PublicSubnet2
-  CanvasVPCPublicSubnet2NATGateway:
+            PrivateIntegrationsStack/CanvasVPC/PublicSubnet2
+  CanvasVPCPublicSubnet2NATGatewayE6EAEEAB:
     Type: "AWS::EC2::NatGateway"
     Properties:
-      SubnetId: !Ref CanvasVPCPublicSubnet2Subnet2
+      SubnetId: !Ref CanvasVPCPublicSubnet2Subnet26685AB7
       AllocationId: !GetAtt
-        - CanvasVPCPublicSubnet2
+        - CanvasVPCPublicSubnet2EIP40226FDB
         - AllocationId
       Tags:
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PublicSubnet2
-  CanvasVPCPrivateSubnet1Subnet:
+            PrivateIntegrationsStack/CanvasVPC/PublicSubnet2
+  CanvasVPCPrivateSubnet1SubnetE5CDA06F:
     Type: "AWS::EC2::Subnet"
     Properties:
-      VpcId: !Ref CanvasVPC
+      VpcId: !Ref CanvasVPCD20D58E8
       AvailabilityZone: !Select
         - 0
         - !GetAZs ""
@@ -139,30 +139,30 @@ Resources:
           Value: Private
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PrivateSubnet1
-  CanvasVPCPrivateSubnet1RouteTable:
+            PrivateIntegrationsStack/CanvasVPC/PrivateSubnet1
+  CanvasVPCPrivateSubnet1RouteTable2DE71EA5:
     Type: "AWS::EC2::RouteTable"
     Properties:
-      VpcId: !Ref CanvasVPC
+      VpcId: !Ref CanvasVPCD20D58E8
       Tags:
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PrivateSubnet1
-  CanvasVPCPrivateSubnet1RouteTableAssociation:
+            PrivateIntegrationsStack/CanvasVPC/PrivateSubnet1
+  CanvasVPCPrivateSubnet1RouteTableAssociation0CFE385A:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
-      RouteTableId: !Ref CanvasVPCPrivateSubnet1RouteTable
-      SubnetId: !Ref CanvasVPCPrivateSubnet1Subnet
-  CanvasVPCPrivateSubnet1DefaultRoute:
+      RouteTableId: !Ref CanvasVPCPrivateSubnet1RouteTable2DE71EA5
+      SubnetId: !Ref CanvasVPCPrivateSubnet1SubnetE5CDA06F
+  CanvasVPCPrivateSubnet1DefaultRouteAAEB83F7:
     Type: "AWS::EC2::Route"
     Properties:
-      RouteTableId: !Ref CanvasVPCPrivateSubnet1RouteTable
+      RouteTableId: !Ref CanvasVPCPrivateSubnet1RouteTable2DE71EA5
       DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref CanvasVPCPublicSubnet1NATGateway
-  CanvasVPCPrivateSubnet2Subnet:
+      NatGatewayId: !Ref CanvasVPCPublicSubnet1NATGatewayC5702CC8
+  CanvasVPCPrivateSubnet2SubnetA9278FA5:
     Type: "AWS::EC2::Subnet"
     Properties:
-      VpcId: !Ref CanvasVPC
+      VpcId: !Ref CanvasVPCD20D58E8
       AvailabilityZone: !Select
         - 1
         - !GetAZs ""
@@ -175,40 +175,40 @@ Resources:
           Value: Private
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PrivateSubnet2
-  CanvasVPCPrivateSubnet2RouteTable:
+            PrivateIntegrationsStack/CanvasVPC/PrivateSubnet2
+  CanvasVPCPrivateSubnet2RouteTable6E1CF234:
     Type: "AWS::EC2::RouteTable"
     Properties:
-      VpcId: !Ref CanvasVPC
+      VpcId: !Ref CanvasVPCD20D58E8
       Tags:
         - Key: Name
           Value: >-
-            CanvasStack/CanvasVPC/PrivateSubnet2
-  CanvasVPCPrivateSubnet2RouteTableAssociation:
+            PrivateIntegrationsStack/CanvasVPC/PrivateSubnet2
+  CanvasVPCPrivateSubnet2RouteTableAssociation7F682A6E:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
-      RouteTableId: !Ref CanvasVPCPrivateSubnet2RouteTable
-      SubnetId: !Ref CanvasVPCPrivateSubnet2Subnet
-  CanvasVPCPrivateSubnet2DefaultRoute:
+      RouteTableId: !Ref CanvasVPCPrivateSubnet2RouteTable6E1CF234
+      SubnetId: !Ref CanvasVPCPrivateSubnet2SubnetA9278FA5
+  CanvasVPCPrivateSubnet2DefaultRoute012406AE:
     Type: "AWS::EC2::Route"
     Properties:
-      RouteTableId: !Ref CanvasVPCPrivateSubnet2RouteTable
+      RouteTableId: !Ref CanvasVPCPrivateSubnet2RouteTable6E1CF234
       DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref CanvasVPCPublicSubnet2NATGateway
-  CanvasVPC:
+      NatGatewayId: !Ref CanvasVPCPublicSubnet2NATGatewayE6EAEEAB
+  CanvasVPCIGW3645F9D4:
     Type: "AWS::EC2::InternetGateway"
     Properties:
       Tags:
         - Key: Name
-          Value: CanvasStack/CanvasVPC
-  CanvasVPCVPCGW:
+          Value: PrivateIntegrationsStack/CanvasVPC
+  CanvasVPCVPCGW514A8E2A:
     Type: "AWS::EC2::VPCGatewayAttachment"
     Properties:
-      VpcId: !Ref CanvasVPC
-      InternetGatewayId: !Ref CanvasVPC
-  CanvasCluster:
+      VpcId: !Ref CanvasVPCD20D58E8
+      InternetGatewayId: !Ref CanvasVPCIGW3645F9D4
+  CanvasCluster09C95435:
     Type: "AWS::ECS::Cluster"
-  CanvasService:
+  CanvasServiceLB8E9ECEA5:
     Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
     Properties:
       LoadBalancerAttributes:
@@ -217,48 +217,48 @@ Resources:
       Scheme: internal
       SecurityGroups:
         - !GetAtt
-          - CanvasServiceLBSecurityGroup
+          - CanvasServiceLBSecurityGroup22BA351A
           - GroupId
       Subnets:
-        - !Ref CanvasVPCPrivateSubnet1Subnet
-        - !Ref CanvasVPCPrivateSubnet2Subnet
+        - !Ref CanvasVPCPrivateSubnet1SubnetE5CDA06F
+        - !Ref CanvasVPCPrivateSubnet2SubnetA9278FA5
       Type: application
-  CanvasServiceLBSecurityGroup:
+  CanvasServiceLBSecurityGroup22BA351A:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
       GroupDescription: >-
         Automatically created Security Group for ELB
-        CanvasStackCanvasServiceLBCB8E0368
+        PrivateIntegrationsStackCanvasServiceLBCB8E0368
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
           Description: Allow from anyone on port 80
           FromPort: 80
           IpProtocol: tcp
           ToPort: 80
-      VpcId: !Ref CanvasVPC
-  CanvasServiceLBSecurityGrouptoCanvasStackCanvasServiceSecurityGroup:
+      VpcId: !Ref CanvasVPCD20D58E8
+  CanvasServiceLBSecurityGrouptoPrivateIntegrationsStackCanvasServiceSecurityGroupD7C89143805EA68A3C:
     Type: "AWS::EC2::SecurityGroupEgress"
     Properties:
       GroupId: !GetAtt
-        - CanvasServiceLBSecurityGroup
+        - CanvasServiceLBSecurityGroup22BA351A
         - GroupId
       IpProtocol: tcp
       Description: Load balancer to target
       DestinationSecurityGroupId: !GetAtt
-        - CanvasServiceSecurityGroup
+        - CanvasServiceSecurityGroup334FF7AF
         - GroupId
       FromPort: 80
       ToPort: 80
-  CanvasServiceLBPublicListener:
+  CanvasServiceLBPublicListener2554FECD:
     Type: "AWS::ElasticLoadBalancingV2::Listener"
     Properties:
       DefaultActions:
-        - TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
+        - TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup0E6605DB
           Type: forward
-      LoadBalancerArn: !Ref CanvasService
+      LoadBalancerArn: !Ref CanvasServiceLB8E9ECEA5
       Port: 80
       Protocol: HTTP
-  CanvasServiceLBPublicListenerECSGroup:
+  CanvasServiceLBPublicListenerECSGroup0E6605DB:
     Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
     Properties:
       Port: 80
@@ -267,8 +267,8 @@ Resources:
         - Key: stickiness.enabled
           Value: "false"
       TargetType: ip
-      VpcId: !Ref CanvasVPC
-  CanvasServiceTaskDefTaskRole:
+      VpcId: !Ref CanvasVPCD20D58E8
+  CanvasServiceTaskDefTaskRole2B89439A:
     Type: "AWS::IAM::Role"
     Properties:
       AssumeRolePolicyDocument:
@@ -278,16 +278,16 @@ Resources:
             Principal:
               Service: ecs-tasks.amazonaws.com
         Version: 2012-10-17
-  CanvasServiceTaskDef:
+  CanvasServiceTaskDef914930A0:
     Type: "AWS::ECS::TaskDefinition"
     Properties:
       ContainerDefinitions:
         - Essential: true
-          Image: "580472969326.dkr.ecr.us-west-1.amazonaws.com/canvas-app:latest"
+          Image: "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest"
           LogConfiguration:
             LogDriver: awslogs
             Options:
-              awslogs-group: !Ref CanvasServiceTaskDefwebLogGroup
+              awslogs-group: !Ref CanvasServiceTaskDefwebLogGroupBA8BE497
               awslogs-stream-prefix: CanvasService
               awslogs-region: !Ref "AWS::Region"
           Name: web
@@ -296,22 +296,22 @@ Resources:
               Protocol: tcp
       Cpu: "512"
       ExecutionRoleArn: !GetAtt
-        - CanvasServiceTaskDefExecutionRole
+        - CanvasServiceTaskDefExecutionRoleC7103AEA
         - Arn
       Family: >-
-        CanvasStackCanvasServiceTaskDefB5E162FC
+        PrivateIntegrationsStackCanvasServiceTaskDefB5E162FC
       Memory: "2048"
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
       TaskRoleArn: !GetAtt
-        - CanvasServiceTaskDefTaskRole
+        - CanvasServiceTaskDefTaskRole2B89439A
         - Arn
-  CanvasServiceTaskDefwebLogGroup:
+  CanvasServiceTaskDefwebLogGroupBA8BE497:
     Type: "AWS::Logs::LogGroup"
     UpdateReplacePolicy: Retain
     DeletionPolicy: Retain
-  CanvasServiceTaskDefExecutionRole:
+  CanvasServiceTaskDefExecutionRoleC7103AEA:
     Type: "AWS::IAM::Role"
     Properties:
       AssumeRolePolicyDocument:
@@ -321,33 +321,27 @@ Resources:
             Principal:
               Service: ecs-tasks.amazonaws.com
         Version: 2012-10-17
-  CanvasServiceTaskDefExecutionRoleDefaultPolicy:
+  CanvasServiceTaskDefExecutionRoleDefaultPolicy0F96072D:
     Type: "AWS::IAM::Policy"
     Properties:
       PolicyDocument:
         Statement:
           - Action:
-              - 'ecr:GetDownloadUrlForLayer'
-              - 'ecr:BatchGetImage'
-              - 'ecr:BatchCheckLayerAvailability'
-            Resource: '*'
-            Effect: Allow
-          - Action:
               - "logs:CreateLogStream"
               - "logs:PutLogEvents"
             Effect: Allow
             Resource: !GetAtt
-              - CanvasServiceTaskDefwebLogGroup
+              - CanvasServiceTaskDefwebLogGroupBA8BE497
               - Arn
         Version: 2012-10-17
       PolicyName: >-
-        CanvasServiceTaskDefExecutionRoleDefaultPolicy
+        CanvasServiceTaskDefExecutionRoleDefaultPolicy0F96072D
       Roles:
-        - !Ref CanvasServiceTaskDefExecutionRole
-  CanvasService:
+        - !Ref CanvasServiceTaskDefExecutionRoleC7103AEA
+  CanvasService73010F72:
     Type: "AWS::ECS::Service"
     Properties:
-      Cluster: !Ref CanvasCluster
+      Cluster: !Ref CanvasCluster09C95435
       DeploymentConfiguration:
         MaximumPercent: 200
         MinimumHealthyPercent: 50
@@ -358,76 +352,76 @@ Resources:
       LoadBalancers:
         - ContainerName: web
           ContainerPort: 80
-          TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
+          TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup0E6605DB
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: DISABLED
           SecurityGroups:
             - !GetAtt
-              - CanvasServiceSecurityGroup
+              - CanvasServiceSecurityGroup334FF7AF
               - GroupId
           Subnets:
-            - !Ref CanvasVPCPrivateSubnet1Subnet
-            - !Ref CanvasVPCPrivateSubnet2Subnet
-      TaskDefinition: !Ref CanvasServiceTaskDef
+            - !Ref CanvasVPCPrivateSubnet1SubnetE5CDA06F
+            - !Ref CanvasVPCPrivateSubnet2SubnetA9278FA5
+      TaskDefinition: !Ref CanvasServiceTaskDef914930A0
     DependsOn:
-      - CanvasServiceLBPublicListenerECSGroup
-      - CanvasServiceLBPublicListener
-  CanvasServiceSecurityGroup:
+      - CanvasServiceLBPublicListenerECSGroup0E6605DB
+      - CanvasServiceLBPublicListener2554FECD
+  CanvasServiceSecurityGroup334FF7AF:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
       GroupDescription: >-
-        CanvasStack/CanvasService/Service/SecurityGroup
+        PrivateIntegrationsStack/CanvasService/Service/SecurityGroup
       SecurityGroupEgress:
         - CidrIp: 0.0.0.0/0
           Description: Allow all outbound traffic by default
           IpProtocol: "-1"
-      VpcId: !Ref CanvasVPC
-  CanvasServiceSecurityGroupfromCanvasStackCanvasServiceLBSecurityGroup:
+      VpcId: !Ref CanvasVPCD20D58E8
+  CanvasServiceSecurityGroupfromPrivateIntegrationsStackCanvasServiceLBSecurityGroup37A9AEF980935D99E0:
     Type: "AWS::EC2::SecurityGroupIngress"
     Properties:
       IpProtocol: tcp
       Description: Load balancer to target
       FromPort: 80
       GroupId: !GetAtt
-        - CanvasServiceSecurityGroup
+        - CanvasServiceSecurityGroup334FF7AF
         - GroupId
       SourceSecurityGroupId: !GetAtt
-        - CanvasServiceLBSecurityGroup
+        - CanvasServiceLBSecurityGroup22BA351A
         - GroupId
       ToPort: 80
-  CanvasAPI:
+  CanvasAPI74888AAD:
     Type: "AWS::ApiGatewayV2::Api"
     Properties:
-      Name: private-integrations-
+      Name: canvas
       ProtocolType: HTTP
-  CanvasAPIANYproxylistener:
+  CanvasAPIANYproxylistenerED87ABC9:
     Type: "AWS::ApiGatewayV2::Integration"
     Properties:
-      ApiId: !Ref CanvasAPI
+      ApiId: !Ref CanvasAPI74888AAD
       IntegrationType: HTTP_PROXY
-      ConnectionId: !Ref CanvasAPIVpcLink
+      ConnectionId: !Ref CanvasAPIVpcLink1E8511BD8
       ConnectionType: VPC_LINK
       IntegrationMethod: ANY
-      IntegrationUri: !Ref CanvasServiceLBPublicListener
+      IntegrationUri: !Ref CanvasServiceLBPublicListener2554FECD
       PayloadFormatVersion: "1.0"
-  CanvasAPIANYproxy:
+  CanvasAPIANYproxyE1641F8A:
     Type: "AWS::ApiGatewayV2::Route"
     Properties:
-      ApiId: !Ref CanvasAPI
+      ApiId: !Ref CanvasAPI74888AAD
       RouteKey: "ANY /{proxy+}"
       AuthorizationType: NONE
       Target: !Join
         - ""
         - - integrations/
-          - !Ref CanvasAPIANYproxylistener
-  CanvasAPIVpcLink:
+          - !Ref CanvasAPIANYproxylistenerED87ABC9
+  CanvasAPIVpcLink1E8511BD8:
     Type: "AWS::ApiGatewayV2::VpcLink"
     Properties:
-      Name: CanvasStackCanvasAPIVpcLink
+      Name: PrivateIntegrationsStackCanvasAPIVpcLink1C5205521
       SubnetIds:
-        - !Ref CanvasVPCPrivateSubnet1Subnet
-        - !Ref CanvasVPCPrivateSubnet2Subnet
+        - !Ref CanvasVPCPrivateSubnet1SubnetE5CDA06F
+        - !Ref CanvasVPCPrivateSubnet2SubnetA9278FA5
       SecurityGroupIds: []
   myLogGroup46524CAB:
     Type: "AWS::Logs::LogGroup"
@@ -438,7 +432,7 @@ Resources:
   StageWithLogging:
     Type: "AWS::ApiGatewayV2::Stage"
     Properties:
-      ApiId: !Ref CanvasAPI
+      ApiId: !Ref CanvasAPI74888AAD
       StageName: $default
       AccessLogSettings:
         DestinationArn: !GetAtt
@@ -450,19 +444,19 @@ Resources:
           $context.status $context.responseLength $context.requestId
       AutoDeploy: true
 Outputs:
-  CanvasServiceLoadBalancerDNS:
+  CanvasServiceLoadBalancerDNSCBE42D83:
     Value: !GetAtt
-      - CanvasService
+      - CanvasServiceLB8E9ECEA5
       - DNSName
-  CanvasServiceServiceURL:
+  CanvasServiceServiceURLB6E59CA2:
     Value: !Join
       - ""
       - - "http://"
         - !GetAtt
-          - CanvasService
+          - CanvasServiceLB8E9ECEA5
           - DNSName
   APIinvokeURL:
     Description: Your API's invoke URL
     Value: !GetAtt
-      - CanvasAPI
+      - CanvasAPI74888AAD
       - ApiEndpoint
