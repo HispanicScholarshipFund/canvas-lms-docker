@@ -1,0 +1,462 @@
+Resources:
+  PrivateIntegrationsTutorialVPCD20D58E8:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      InstanceTenancy: default
+      Tags:
+        - Key: Name
+          Value: PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC
+  PrivateIntegrationsTutorialVPCPublicSubnet1SubnetBE0B3CBD:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+      AvailabilityZone: !Select 
+        - 0
+        - !GetAZs ''
+      CidrBlock: 10.0.0.0/18
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: 'aws-cdk:subnet-name'
+          Value: Public
+        - Key: 'aws-cdk:subnet-type'
+          Value: Public
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PublicSubnet1
+  PrivateIntegrationsTutorialVPCPublicSubnet1RouteTableA63763CC:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+      Tags:
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PublicSubnet1
+  PrivateIntegrationsTutorialVPCPublicSubnet1RouteTableAssociationFD6DF484:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet1RouteTableA63763CC
+      SubnetId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet1SubnetBE0B3CBD
+  PrivateIntegrationsTutorialVPCPublicSubnet1DefaultRouteD59FC1D2:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet1RouteTableA63763CC
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref PrivateIntegrationsTutorialVPCIGW3645F9D4
+    DependsOn:
+      - PrivateIntegrationsTutorialVPCVPCGW514A8E2A
+  PrivateIntegrationsTutorialVPCPublicSubnet1EIPD3DAF766:
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PublicSubnet1
+  PrivateIntegrationsTutorialVPCPublicSubnet1NATGatewayC5702CC8:
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      SubnetId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet1SubnetBE0B3CBD
+      AllocationId: !GetAtt 
+        - PrivateIntegrationsTutorialVPCPublicSubnet1EIPD3DAF766
+        - AllocationId
+      Tags:
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PublicSubnet1
+  PrivateIntegrationsTutorialVPCPublicSubnet2Subnet26685AB7:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+      AvailabilityZone: !Select 
+        - 1
+        - !GetAZs ''
+      CidrBlock: 10.0.64.0/18
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: 'aws-cdk:subnet-name'
+          Value: Public
+        - Key: 'aws-cdk:subnet-type'
+          Value: Public
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PublicSubnet2
+  PrivateIntegrationsTutorialVPCPublicSubnet2RouteTable356B306D:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+      Tags:
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PublicSubnet2
+  PrivateIntegrationsTutorialVPCPublicSubnet2RouteTableAssociation1035F5D0:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet2RouteTable356B306D
+      SubnetId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet2Subnet26685AB7
+  PrivateIntegrationsTutorialVPCPublicSubnet2DefaultRoute4AB2237D:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet2RouteTable356B306D
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref PrivateIntegrationsTutorialVPCIGW3645F9D4
+    DependsOn:
+      - PrivateIntegrationsTutorialVPCVPCGW514A8E2A
+  PrivateIntegrationsTutorialVPCPublicSubnet2EIP40226FDB:
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PublicSubnet2
+  PrivateIntegrationsTutorialVPCPublicSubnet2NATGatewayE6EAEEAB:
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      SubnetId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet2Subnet26685AB7
+      AllocationId: !GetAtt 
+        - PrivateIntegrationsTutorialVPCPublicSubnet2EIP40226FDB
+        - AllocationId
+      Tags:
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PublicSubnet2
+  PrivateIntegrationsTutorialVPCPrivateSubnet1SubnetE5CDA06F:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+      AvailabilityZone: !Select 
+        - 0
+        - !GetAZs ''
+      CidrBlock: 10.0.128.0/18
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: 'aws-cdk:subnet-name'
+          Value: Private
+        - Key: 'aws-cdk:subnet-type'
+          Value: Private
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PrivateSubnet1
+  PrivateIntegrationsTutorialVPCPrivateSubnet1RouteTable2DE71EA5:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+      Tags:
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PrivateSubnet1
+  PrivateIntegrationsTutorialVPCPrivateSubnet1RouteTableAssociation0CFE385A:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId: !Ref PrivateIntegrationsTutorialVPCPrivateSubnet1RouteTable2DE71EA5
+      SubnetId: !Ref PrivateIntegrationsTutorialVPCPrivateSubnet1SubnetE5CDA06F
+  PrivateIntegrationsTutorialVPCPrivateSubnet1DefaultRouteAAEB83F7:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId: !Ref PrivateIntegrationsTutorialVPCPrivateSubnet1RouteTable2DE71EA5
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet1NATGatewayC5702CC8
+  PrivateIntegrationsTutorialVPCPrivateSubnet2SubnetA9278FA5:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+      AvailabilityZone: !Select 
+        - 1
+        - !GetAZs ''
+      CidrBlock: 10.0.192.0/18
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: 'aws-cdk:subnet-name'
+          Value: Private
+        - Key: 'aws-cdk:subnet-type'
+          Value: Private
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PrivateSubnet2
+  PrivateIntegrationsTutorialVPCPrivateSubnet2RouteTable6E1CF234:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+      Tags:
+        - Key: Name
+          Value: >-
+            PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC/PrivateSubnet2
+  PrivateIntegrationsTutorialVPCPrivateSubnet2RouteTableAssociation7F682A6E:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId: !Ref PrivateIntegrationsTutorialVPCPrivateSubnet2RouteTable6E1CF234
+      SubnetId: !Ref PrivateIntegrationsTutorialVPCPrivateSubnet2SubnetA9278FA5
+  PrivateIntegrationsTutorialVPCPrivateSubnet2DefaultRoute012406AE:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId: !Ref PrivateIntegrationsTutorialVPCPrivateSubnet2RouteTable6E1CF234
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref PrivateIntegrationsTutorialVPCPublicSubnet2NATGatewayE6EAEEAB
+  PrivateIntegrationsTutorialVPCIGW3645F9D4:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties:
+      Tags:
+        - Key: Name
+          Value: PrivateIntegrationsStack/PrivateIntegrationsTutorialVPC
+  PrivateIntegrationsTutorialVPCVPCGW514A8E2A:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+      InternetGatewayId: !Ref PrivateIntegrationsTutorialVPCIGW3645F9D4
+  PrivateIntegrationsTutorialCluster09C95435:
+    Type: 'AWS::ECS::Cluster'
+  PrivateIntegrationsTutorialServiceLB8E9ECEA5:
+    Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+    Properties:
+      LoadBalancerAttributes:
+        - Key: deletion_protection.enabled
+          Value: 'false'
+      Scheme: internal
+      SecurityGroups:
+        - !GetAtt 
+          - PrivateIntegrationsTutorialServiceLBSecurityGroup22BA351A
+          - GroupId
+      Subnets:
+        - !Ref PrivateIntegrationsTutorialVPCPrivateSubnet1SubnetE5CDA06F
+        - !Ref PrivateIntegrationsTutorialVPCPrivateSubnet2SubnetA9278FA5
+      Type: application
+  PrivateIntegrationsTutorialServiceLBSecurityGroup22BA351A:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: >-
+        Automatically created Security Group for ELB
+        PrivateIntegrationsStackPrivateIntegrationsTutorialServiceLBCB8E0368
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          Description: Allow from anyone on port 80
+          FromPort: 80
+          IpProtocol: tcp
+          ToPort: 80
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+  PrivateIntegrationsTutorialServiceLBSecurityGrouptoPrivateIntegrationsStackPrivateIntegrationsTutorialServiceSecurityGroupD7C89143805EA68A3C:
+    Type: 'AWS::EC2::SecurityGroupEgress'
+    Properties:
+      GroupId: !GetAtt 
+        - PrivateIntegrationsTutorialServiceLBSecurityGroup22BA351A
+        - GroupId
+      IpProtocol: tcp
+      Description: Load balancer to target
+      DestinationSecurityGroupId: !GetAtt 
+        - PrivateIntegrationsTutorialServiceSecurityGroup334FF7AF
+        - GroupId
+      FromPort: 80
+      ToPort: 80
+  PrivateIntegrationsTutorialServiceLBPublicListener2554FECD:
+    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Properties:
+      DefaultActions:
+        - TargetGroupArn: !Ref PrivateIntegrationsTutorialServiceLBPublicListenerECSGroup0E6605DB
+          Type: forward
+      LoadBalancerArn: !Ref PrivateIntegrationsTutorialServiceLB8E9ECEA5
+      Port: 80
+      Protocol: HTTP
+  PrivateIntegrationsTutorialServiceLBPublicListenerECSGroup0E6605DB:
+    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+    Properties:
+      Port: 80
+      Protocol: HTTP
+      TargetGroupAttributes:
+        - Key: stickiness.enabled
+          Value: 'false'
+      TargetType: ip
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+  PrivateIntegrationsTutorialServiceTaskDefTaskRole2B89439A:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+        Version: 2012-10-17
+  PrivateIntegrationsTutorialServiceTaskDef914930A0:
+    Type: 'AWS::ECS::TaskDefinition'
+    Properties:
+      ContainerDefinitions:
+        - Essential: true
+          Image: 'public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest'
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref PrivateIntegrationsTutorialServiceTaskDefwebLogGroupBA8BE497
+              awslogs-stream-prefix: PrivateIntegrationsTutorialService
+              awslogs-region: !Ref 'AWS::Region'
+          Name: web
+          PortMappings:
+            - ContainerPort: 80
+              Protocol: tcp
+      Cpu: '512'
+      ExecutionRoleArn: !GetAtt 
+        - PrivateIntegrationsTutorialServiceTaskDefExecutionRoleC7103AEA
+        - Arn
+      Family: >-
+        PrivateIntegrationsStackPrivateIntegrationsTutorialServiceTaskDefB5E162FC
+      Memory: '2048'
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      TaskRoleArn: !GetAtt 
+        - PrivateIntegrationsTutorialServiceTaskDefTaskRole2B89439A
+        - Arn
+  PrivateIntegrationsTutorialServiceTaskDefwebLogGroupBA8BE497:
+    Type: 'AWS::Logs::LogGroup'
+    UpdateReplacePolicy: Retain
+    DeletionPolicy: Retain
+  PrivateIntegrationsTutorialServiceTaskDefExecutionRoleC7103AEA:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+        Version: 2012-10-17
+  PrivateIntegrationsTutorialServiceTaskDefExecutionRoleDefaultPolicy0F96072D:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action:
+              - 'logs:CreateLogStream'
+              - 'logs:PutLogEvents'
+            Effect: Allow
+            Resource: !GetAtt 
+              - PrivateIntegrationsTutorialServiceTaskDefwebLogGroupBA8BE497
+              - Arn
+        Version: 2012-10-17
+      PolicyName: >-
+        PrivateIntegrationsTutorialServiceTaskDefExecutionRoleDefaultPolicy0F96072D
+      Roles:
+        - !Ref PrivateIntegrationsTutorialServiceTaskDefExecutionRoleC7103AEA
+  PrivateIntegrationsTutorialService73010F72:
+    Type: 'AWS::ECS::Service'
+    Properties:
+      Cluster: !Ref PrivateIntegrationsTutorialCluster09C95435
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 50
+      DesiredCount: 2
+      EnableECSManagedTags: false
+      HealthCheckGracePeriodSeconds: 60
+      LaunchType: FARGATE
+      LoadBalancers:
+        - ContainerName: web
+          ContainerPort: 80
+          TargetGroupArn: !Ref PrivateIntegrationsTutorialServiceLBPublicListenerECSGroup0E6605DB
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: DISABLED
+          SecurityGroups:
+            - !GetAtt 
+              - PrivateIntegrationsTutorialServiceSecurityGroup334FF7AF
+              - GroupId
+          Subnets:
+            - !Ref PrivateIntegrationsTutorialVPCPrivateSubnet1SubnetE5CDA06F
+            - !Ref PrivateIntegrationsTutorialVPCPrivateSubnet2SubnetA9278FA5
+      TaskDefinition: !Ref PrivateIntegrationsTutorialServiceTaskDef914930A0
+    DependsOn:
+      - PrivateIntegrationsTutorialServiceLBPublicListenerECSGroup0E6605DB
+      - PrivateIntegrationsTutorialServiceLBPublicListener2554FECD
+  PrivateIntegrationsTutorialServiceSecurityGroup334FF7AF:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: >-
+        PrivateIntegrationsStack/PrivateIntegrationsTutorialService/Service/SecurityGroup
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          Description: Allow all outbound traffic by default
+          IpProtocol: '-1'
+      VpcId: !Ref PrivateIntegrationsTutorialVPCD20D58E8
+  PrivateIntegrationsTutorialServiceSecurityGroupfromPrivateIntegrationsStackPrivateIntegrationsTutorialServiceLBSecurityGroup37A9AEF980935D99E0:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      IpProtocol: tcp
+      Description: Load balancer to target
+      FromPort: 80
+      GroupId: !GetAtt 
+        - PrivateIntegrationsTutorialServiceSecurityGroup334FF7AF
+        - GroupId
+      SourceSecurityGroupId: !GetAtt 
+        - PrivateIntegrationsTutorialServiceLBSecurityGroup22BA351A
+        - GroupId
+      ToPort: 80
+  PrivateIntegrationsTutorialAPI74888AAD:
+    Type: 'AWS::ApiGatewayV2::Api'
+    Properties:
+      Name: private-integrations-tutorial
+      ProtocolType: HTTP
+  PrivateIntegrationsTutorialAPIANYproxylistenerED87ABC9:
+    Type: 'AWS::ApiGatewayV2::Integration'
+    Properties:
+      ApiId: !Ref PrivateIntegrationsTutorialAPI74888AAD
+      IntegrationType: HTTP_PROXY
+      ConnectionId: !Ref PrivateIntegrationsTutorialAPIVpcLink1E8511BD8
+      ConnectionType: VPC_LINK
+      IntegrationMethod: ANY
+      IntegrationUri: !Ref PrivateIntegrationsTutorialServiceLBPublicListener2554FECD
+      PayloadFormatVersion: '1.0'
+  PrivateIntegrationsTutorialAPIANYproxyE1641F8A:
+    Type: 'AWS::ApiGatewayV2::Route'
+    Properties:
+      ApiId: !Ref PrivateIntegrationsTutorialAPI74888AAD
+      RouteKey: 'ANY /{proxy+}'
+      AuthorizationType: NONE
+      Target: !Join 
+        - ''
+        - - integrations/
+          - !Ref PrivateIntegrationsTutorialAPIANYproxylistenerED87ABC9
+  PrivateIntegrationsTutorialAPIVpcLink1E8511BD8:
+    Type: 'AWS::ApiGatewayV2::VpcLink'
+    Properties:
+      Name: PrivateIntegrationsStackPrivateIntegrationsTutorialAPIVpcLink1C5205521
+      SubnetIds:
+        - !Ref PrivateIntegrationsTutorialVPCPrivateSubnet1SubnetE5CDA06F
+        - !Ref PrivateIntegrationsTutorialVPCPrivateSubnet2SubnetA9278FA5
+      SecurityGroupIds: []
+  myLogGroup46524CAB:
+    Type: 'AWS::Logs::LogGroup'
+    Properties:
+      RetentionInDays: 731
+    UpdateReplacePolicy: Retain
+    DeletionPolicy: Retain
+  StageWithLogging:
+    Type: 'AWS::ApiGatewayV2::Stage'
+    Properties:
+      ApiId: !Ref PrivateIntegrationsTutorialAPI74888AAD
+      StageName: $default
+      AccessLogSettings:
+        DestinationArn: !GetAtt 
+          - myLogGroup46524CAB
+          - Arn
+        Format: >-
+          $context.identity.sourceIp - - [$context.requestTime]
+          "$context.httpMethod $context.routeKey $context.protocol"
+          $context.status $context.responseLength $context.requestId
+      AutoDeploy: true
+Outputs:
+  PrivateIntegrationsTutorialServiceLoadBalancerDNSCBE42D83:
+    Value: !GetAtt 
+      - PrivateIntegrationsTutorialServiceLB8E9ECEA5
+      - DNSName
+  PrivateIntegrationsTutorialServiceServiceURLB6E59CA2:
+    Value: !Join 
+      - ''
+      - - 'http://'
+        - !GetAtt 
+          - PrivateIntegrationsTutorialServiceLB8E9ECEA5
+          - DNSName
+  APIinvokeURL:
+    Description: Your API's invoke URL
+    Value: !GetAtt 
+      - PrivateIntegrationsTutorialAPI74888AAD
+      - ApiEndpoint
