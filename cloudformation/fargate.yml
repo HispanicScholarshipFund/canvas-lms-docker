@@ -337,7 +337,7 @@ Resources:
         - CanvasServiceTaskDefExecutionRole
         - Arn
       Family: >-
-        CanvasStackCanvasServiceTaskDef
+        CanvasStackCanvasServiceDelayedJobsTaskDef
       Memory: "2048"
       NetworkMode: awsvpc
       RequiresCompatibilities:
