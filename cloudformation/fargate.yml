@@ -2,7 +2,7 @@ Parameters:
   CanvasAppECRRepositoryUri:
     Type: String
     Description: "URI of the ECR repository"
-    Default: !ImportValue CanvasAppECRRepositoryUri
+    Default: "580472969326.dkr.ecr.us-west-1.amazonaws.com/canvas-app"
 
 Resources:
   CanvasVPC:
