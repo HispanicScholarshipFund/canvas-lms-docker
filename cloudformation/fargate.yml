@@ -283,7 +283,7 @@ Resources:
     Properties:
       ContainerDefinitions:
         - Essential: true
-          Image: "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest"
+          Image: !Sub "${CanvasAppECRRepositoryUri}:latest"
           LogConfiguration:
             LogDriver: awslogs
             Options:
@@ -499,3 +499,8 @@ Outputs:
     Value: !GetAtt
       - CanvasAPI
       - ApiEndpoint
+Parameters:
+  CanvasAppECRRepositoryUri:
+    Type: String
+    Description: "URI of the ECR repository"
+    Default: !ImportValue CanvasAppECRRepositoryUri

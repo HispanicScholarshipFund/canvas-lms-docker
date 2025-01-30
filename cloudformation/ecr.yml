@@ -50,3 +50,5 @@ Outputs:
   RepositoryUri:
     Description: "URI of the created ECR repository"
     Value: !GetAtt CanvasAppECRRepository.RepositoryUri
+    Export:
+      Name: "CanvasAppECRRepositoryUri"
