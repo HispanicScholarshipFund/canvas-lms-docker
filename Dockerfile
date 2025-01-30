@@ -161,6 +161,14 @@ COPY --link --from=builder --chown=${CANVAS_USER_ID} ${CANVAS_HOME} ${CANVAS_HOM
 
 WORKDIR ${CANVAS_HOME}
 
+RUN apk update && apk add --update --no-cache \
+    python3 \
+    py3-pip \
+    py3-virtualenv && \
+    ln -sf python3 /usr/bin/python
+
+RUN pip3 install lxml --break-system-packages
+
 USER ${CANVAS_USER}
 
 EXPOSE 3000
