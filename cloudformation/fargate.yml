@@ -313,6 +313,38 @@ Resources:
       TaskRoleArn: !GetAtt
         - CanvasServiceTaskDefTaskRole
         - Arn
+
+  CanvasServiceDelayedJobsTaskDef:
+    Type: "AWS::ECS::TaskDefinition"
+    Properties:
+      ContainerDefinitions:
+        - Essential: true
+          Image: !Sub "${CanvasAppECRRepositoryUri}:latest"
+          Command: ["bundle", "exec", "script/delayed_job", "run"]
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref CanvasServiceTaskDefwebLogGroup
+              awslogs-stream-prefix: CanvasService
+              awslogs-region: !Ref "AWS::Region"
+          Name: web
+          PortMappings:
+            - ContainerPort: 80
+              Protocol: tcp
+      Cpu: "512"
+      ExecutionRoleArn: !GetAtt
+        - CanvasServiceTaskDefExecutionRole
+        - Arn
+      Family: >-
+        CanvasStackCanvasServiceTaskDef
+      Memory: "2048"
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      TaskRoleArn: !GetAtt
+        - CanvasServiceTaskDefTaskRole
+        - Arn
+
   CanvasServiceTaskDefwebLogGroup:
     Type: "AWS::Logs::LogGroup"
     UpdateReplacePolicy: Retain
@@ -392,10 +424,6 @@ Resources:
       EnableECSManagedTags: false
       HealthCheckGracePeriodSeconds: 60
       LaunchType: FARGATE
-      # LoadBalancers:
-      #   - ContainerName: web
-      #     ContainerPort: 80
-      #     TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: DISABLED
@@ -406,7 +434,7 @@ Resources:
           Subnets:
             - !Ref CanvasVPCPrivateSubnet1Subnet
             - !Ref CanvasVPCPrivateSubnet2Subnet
-      TaskDefinition: !Ref CanvasServiceTaskDef
+      TaskDefinition: !Ref CanvasServiceDelayedJobsTaskDef
     DependsOn:
       - CanvasServiceLBPublicListenerECSGroup
       - CanvasServiceLBPublicListener
