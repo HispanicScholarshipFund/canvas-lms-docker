@@ -365,9 +365,18 @@ Resources:
       PolicyDocument:
         Statement:
           - Action:
-              - "ecr:GetDownloadUrlForLayer"
               - "ecr:BatchGetImage"
               - "ecr:BatchCheckLayerAvailability"
+              - "ecr:GetAuthorizationToken"
+              - "ecr:GetDownloadUrlForLayer"
+              - "ecr:DescribeRepositories"
+              - "ecr:GetRepositoryPolicy"
+              - "ecr:ListImages"
+              - "ecr:DescribeImages"
+              - "ecr:ListTagsForResource"
+              - "ecr:DescribeImageScanFindings"
+              - "ecr:GetLifecyclePolicy"
+              - "ecr:GetLifecyclePolicyPreview"
             Resource: "*"
             Effect: Allow
           - Action:
