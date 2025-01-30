@@ -284,6 +284,7 @@ Resources:
             Principal:
               Service: ecs-tasks.amazonaws.com
         Version: 2012-10-17
+
   CanvasServiceTaskDef:
     Type: "AWS::ECS::TaskDefinition"
     Properties:
@@ -359,26 +360,29 @@ Resources:
             Principal:
               Service: ecs-tasks.amazonaws.com
         Version: 2012-10-17
+    ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+
   CanvasServiceTaskDefExecutionRoleDefaultPolicy:
     Type: "AWS::IAM::Policy"
     Properties:
       PolicyDocument:
         Statement:
-          - Action:
-              - "ecr:BatchGetImage"
-              - "ecr:BatchCheckLayerAvailability"
-              - "ecr:GetAuthorizationToken"
-              - "ecr:GetDownloadUrlForLayer"
-              - "ecr:DescribeRepositories"
-              - "ecr:GetRepositoryPolicy"
-              - "ecr:ListImages"
-              - "ecr:DescribeImages"
-              - "ecr:ListTagsForResource"
-              - "ecr:DescribeImageScanFindings"
-              - "ecr:GetLifecyclePolicy"
-              - "ecr:GetLifecyclePolicyPreview"
-            Resource: "*"
-            Effect: Allow
+          # - Action:
+          #     - "ecr:BatchGetImage"
+          #     - "ecr:BatchCheckLayerAvailability"
+          #     - "ecr:GetAuthorizationToken"
+          #     - "ecr:GetDownloadUrlForLayer"
+          #     - "ecr:DescribeRepositories"
+          #     - "ecr:GetRepositoryPolicy"
+          #     - "ecr:ListImages"
+          #     - "ecr:DescribeImages"
+          #     - "ecr:ListTagsForResource"
+          #     - "ecr:DescribeImageScanFindings"
+          #     - "ecr:GetLifecyclePolicy"
+          #     - "ecr:GetLifecyclePolicyPreview"
+          #   Resource: "*"
+          #   Effect: Allow
           - Action:
               - "logs:CreateLogStream"
               - "logs:PutLogEvents"
