@@ -344,6 +344,7 @@ Resources:
         CanvasServiceTaskDefExecutionRoleDefaultPolicy
       Roles:
         - !Ref CanvasServiceTaskDefExecutionRole
+
   CanvasService:
     Type: "AWS::ECS::Service"
     Properties:
@@ -373,6 +374,37 @@ Resources:
     DependsOn:
       - CanvasServiceLBPublicListenerECSGroup
       - CanvasServiceLBPublicListener
+
+  CanvasServiceDelayedJobs:
+    Type: "AWS::ECS::Service"
+    Properties:
+      Cluster: !Ref CanvasCluster
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 50
+      DesiredCount: 2
+      EnableECSManagedTags: false
+      HealthCheckGracePeriodSeconds: 60
+      LaunchType: FARGATE
+      # LoadBalancers:
+      #   - ContainerName: web
+      #     ContainerPort: 80
+      #     TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: DISABLED
+          SecurityGroups:
+            - !GetAtt
+              - CanvasServiceSecurityGroup
+              - GroupId
+          Subnets:
+            - !Ref CanvasVPCPrivateSubnet1Subnet
+            - !Ref CanvasVPCPrivateSubnet2Subnet
+      TaskDefinition: !Ref CanvasServiceTaskDef
+    DependsOn:
+      - CanvasServiceLBPublicListenerECSGroup
+      - CanvasServiceLBPublicListener
+
   CanvasServiceSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
@@ -383,6 +415,7 @@ Resources:
           Description: Allow all outbound traffic by default
           IpProtocol: "-1"
       VpcId: !Ref CanvasVPC
+
   CanvasServiceSecurityGroupfromCanvasStackCanvasServiceLBSecurityGroup:
     Type: "AWS::EC2::SecurityGroupIngress"
     Properties:
