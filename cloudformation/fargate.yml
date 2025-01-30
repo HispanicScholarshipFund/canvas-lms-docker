@@ -327,7 +327,7 @@ Resources:
               awslogs-group: !Ref CanvasServiceTaskDefwebLogGroup
               awslogs-stream-prefix: CanvasService
               awslogs-region: !Ref "AWS::Region"
-          Name: web
+          Name: delayedJobs
           PortMappings:
             - ContainerPort: 80
               Protocol: tcp
