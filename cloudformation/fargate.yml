@@ -298,9 +298,9 @@ Resources:
               awslogs-stream-prefix: CanvasService
               awslogs-region: !Ref "AWS::Region"
           Name: web
-          # PortMappings:
-          #   - ContainerPort: 80
-          #     Protocol: tcp
+          PortMappings:
+            - ContainerPort: 80
+              Protocol: tcp
       Cpu: "512"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
@@ -407,10 +407,10 @@ Resources:
       EnableECSManagedTags: false
       HealthCheckGracePeriodSeconds: 60
       LaunchType: FARGATE
-      # LoadBalancers:
-      #   - ContainerName: web
-      #     ContainerPort: 80
-      #     TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
+      LoadBalancers:
+        - ContainerName: web
+          ContainerPort: 80
+          TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: DISABLED
