@@ -499,8 +499,3 @@ Outputs:
     Value: !GetAtt
       - CanvasAPI
       - ApiEndpoint
-Parameters:
-  CanvasAppECRRepositoryUri:
-    Type: String
-    Description: "URI of the ECR repository"
-    Default: !ImportValue CanvasAppECRRepositoryUri
