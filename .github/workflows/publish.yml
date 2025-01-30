@@ -51,13 +51,6 @@ jobs:
   #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   #         aws-region: ${{ env.AWS_REGION }}
 
-  #     - name: Get .env values
-  #       run: |
-  #         SECRET_NAME=PROD_HSF_CANVAS
-  #         AWS_SECRET=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME)
-  #         jq -r '.SecretString' <<< $AWS_SECRET | jq -r 'keys[] as $k | "\($k)=\(.[$k])"' >> master_env_file
-  #         echo "$(<master_env_file )" >> $GITHUB_ENV
-
   #     - name: Login to Amazon ECR
   #       id: login-ecr
   #       uses: aws-actions/amazon-ecr-login@v2
