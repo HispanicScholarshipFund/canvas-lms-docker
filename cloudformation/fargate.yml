@@ -1,3 +1,9 @@
+Parameters:
+  CanvasAppECRRepositoryUri:
+    Type: String
+    Description: "URI of the ECR repository"
+    Default: !ImportValue CanvasAppECRRepositoryUri
+
 Resources:
   CanvasVPC:
     Type: "AWS::EC2::VPC"
