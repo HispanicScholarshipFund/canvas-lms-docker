@@ -3,10 +3,6 @@ Parameters:
     Type: String
     Description: "URI of the ECR repository"
     Default: "580472969326.dkr.ecr.us-west-1.amazonaws.com/canvas-app"
-  # CanvasSecretManagerARN:
-  #   Type: String
-  #   Description: "Secrets ARN"
-  #   Default: "arn:aws:secretsmanager:us-west-1:580472969326:secret:PROD_HSF_CANVAS-mpLMvv"
 
 Resources:
   CanvasVPC:
@@ -305,57 +301,6 @@ Resources:
           # PortMappings:
           #   - ContainerPort: 80
           #     Protocol: tcp
-          # Secrets:
-          #   - Name: EMAIL_DOMAIN
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_DOMAIN"
-          #   - Name: EMAIL_HOST_USER
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_HOST_USER"
-          #   - Name: EMAIL_HOST_PASSWORD
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_HOST_PASSWORD"
-          #   - Name: EMAIL_SENDER_ADDRESS
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_SENDER_ADDRESS"
-          #   - Name: EMAIL_SENDER_NAME
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_SENDER_NAME"
-          #   - Name: CANVAS_LMS_DOMAIN
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_DOMAIN"
-          #   - Name: CANVAS_LMS_ADMIN_EMAIL
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_ADMIN_EMAIL"
-          #   - Name: CANVAS_LMS_ADMIN_PASSWORD
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_ADMIN_PASSWORD"
-          #   - Name: CANVAS_LMS_ACCOUNT_NAME
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_ACCOUNT_NAME"
-          #   - Name: CANVAS_LMS_STATS_COLLECTION
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_STATS_COLLECTION"
-          #   - Name: DB_USER
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_USER"
-          #   - Name: DB_PASSWORD
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_PASSWORD"
-          #   - Name: DB_DB
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_DB"
-          #   - Name: DB_HOST
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_HOST"
-          #   - Name: ADDITIONAL_ALLOWED_HOSTS
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:ADDITIONAL_ALLOWED_HOSTS"
-          #   - Name: REDIS_HOST
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:REDIS_HOST"
-          #   - Name: AWS_ACCESS_KEY_ID
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_ACCESS_KEY_ID"
-          #   - Name: AWS_SECRET_ACCESS_KEY
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_SECRET_ACCESS_KEY"
-          #   - Name: AWS_REGION
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_REGION"
-          #   - Name: AWS_S3_BUCKET
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_S3_BUCKET"
-          #   - Name: TZ
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:TZ"
-          #   - Name: EMAIL_PORT
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_PORT"
-          #   - Name: DB_HOST
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_HOST"
-          #   - Name: DB_PORT
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_PORT"
-          #   - Name: DB_DRIVER
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_DRIVER"
       Cpu: "512"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
@@ -387,57 +332,6 @@ Resources:
           # PortMappings:
           #   - ContainerPort: 80
           #     Protocol: tcp
-          # Secrets:
-          #   - Name: EMAIL_DOMAIN
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_DOMAIN"
-          #   - Name: EMAIL_HOST_USER
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_HOST_USER"
-          #   - Name: EMAIL_HOST_PASSWORD
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_HOST_PASSWORD"
-          #   - Name: EMAIL_SENDER_ADDRESS
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_SENDER_ADDRESS"
-          #   - Name: EMAIL_SENDER_NAME
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_SENDER_NAME"
-          #   - Name: CANVAS_LMS_DOMAIN
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_DOMAIN"
-          #   - Name: CANVAS_LMS_ADMIN_EMAIL
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_ADMIN_EMAIL"
-          #   - Name: CANVAS_LMS_ADMIN_PASSWORD
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_ADMIN_PASSWORD"
-          #   - Name: CANVAS_LMS_ACCOUNT_NAME
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_ACCOUNT_NAME"
-          #   - Name: CANVAS_LMS_STATS_COLLECTION
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:CANVAS_LMS_STATS_COLLECTION"
-          #   - Name: DB_USER
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_USER"
-          #   - Name: DB_PASSWORD
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_PASSWORD"
-          #   - Name: DB_DB
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_DB"
-          #   - Name: DB_HOST
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_HOST"
-          #   - Name: ADDITIONAL_ALLOWED_HOSTS
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:ADDITIONAL_ALLOWED_HOSTS"
-          #   - Name: REDIS_HOST
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:REDIS_HOST"
-          #   - Name: AWS_ACCESS_KEY_ID
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_ACCESS_KEY_ID"
-          #   - Name: AWS_SECRET_ACCESS_KEY
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_SECRET_ACCESS_KEY"
-          #   - Name: AWS_REGION
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_REGION"
-          #   - Name: AWS_S3_BUCKET
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_S3_BUCKET"
-          #   - Name: TZ
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:TZ"
-          #   - Name: EMAIL_PORT
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_PORT"
-          #   - Name: DB_HOST
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_HOST"
-          #   - Name: DB_PORT
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_PORT"
-          #   - Name: DB_DRIVER
-          #     ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_DRIVER"
       Cpu: "512"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
@@ -468,7 +362,6 @@ Resources:
         Version: 2012-10-17
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-        - "arn:aws:iam::aws:policy/service-role/SecretsManagerReadWrite"
 
   CanvasServiceTaskDefExecutionRoleDefaultPolicy:
     Type: "AWS::IAM::Policy"
