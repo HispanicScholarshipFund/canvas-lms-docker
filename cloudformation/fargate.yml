@@ -503,10 +503,10 @@ Resources:
       EnableECSManagedTags: false
       HealthCheckGracePeriodSeconds: 60
       LaunchType: FARGATE
-      LoadBalancers:
-        - ContainerName: web
-          ContainerPort: 80
-          TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
+      # LoadBalancers:
+      #   - ContainerName: web
+      #     ContainerPort: 80
+      #     TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: DISABLED
