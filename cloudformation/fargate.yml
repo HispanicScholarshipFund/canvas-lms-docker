@@ -358,13 +358,13 @@ Resources:
             - Name: TZ
               ValueFrom: !Sub "${CanvasSecretManagerARN}:TZ::"
 
-      Cpu: "512"
+      Cpu: "4096"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
         - Arn
       Family: >-
         CanvasStackCanvasServiceTaskDef
-      Memory: "2048"
+      Memory: "10240"
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
@@ -438,13 +438,13 @@ Resources:
               ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_S3_BUCKET::"
             - Name: TZ
               ValueFrom: !Sub "${CanvasSecretManagerARN}:TZ::"
-      Cpu: "512"
+      Cpu: "4096"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
         - Arn
       Family: >-
         CanvasStackCanvasServiceDelayedJobsTaskDef
-      Memory: "2048"
+      Memory: "10240"
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
