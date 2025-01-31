@@ -563,14 +563,14 @@ Resources:
     Properties:
       IpProtocol: tcp
       Description: Load balancer to target
-      FromPort: 80
+      FromPort: 3000
       GroupId: !GetAtt
         - CanvasServiceSecurityGroup
         - GroupId
       SourceSecurityGroupId: !GetAtt
         - CanvasServiceLBSecurityGroup
         - GroupId
-      ToPort: 80
+      ToPort: 3000
   CanvasAPI:
     Type: "AWS::ApiGatewayV2::Api"
     Properties:
