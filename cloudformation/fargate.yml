@@ -273,7 +273,7 @@ Resources:
   CanvasServiceLBPublicListenerECSGroup:
     Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
     Properties:
-      Port: 3000
+      Port: 80
       Protocol: HTTP
       TargetGroupAttributes:
         - Key: stickiness.enabled
@@ -306,7 +306,7 @@ Resources:
               awslogs-region: !Ref "AWS::Region"
           Name: web
           PortMappings:
-            - ContainerPort: 3000
+            - ContainerPort: 80
               Protocol: tcp
           Secrets:
             - Name: EMAIL_DOMAIN
@@ -507,7 +507,7 @@ Resources:
       LaunchType: FARGATE
       LoadBalancers:
         - ContainerName: web
-          ContainerPort: 3000
+          ContainerPort: 80
           TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
       NetworkConfiguration:
         AwsvpcConfiguration:

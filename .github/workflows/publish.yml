@@ -34,40 +34,40 @@ jobs:
           template: ./cloudformation/ecr.yml
           no-fail-on-empty-changeset: "1"
 
-  # docker-deploy:
-  #   needs: create-ecr
-  #   name: Docker deploy
-  #   runs-on: ubuntu-latest
-  #   environment: production
+  docker-deploy:
+    needs: create-ecr
+    name: Docker deploy
+    runs-on: ubuntu-latest
+    environment: production
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     - name: Configure AWS credentials
-  #       uses: aws-actions/configure-aws-credentials@v4
-  #       with:
-  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #         aws-region: ${{ env.AWS_REGION }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
-  #     - name: Login to Amazon ECR
-  #       id: login-ecr
-  #       uses: aws-actions/amazon-ecr-login@v2
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
-  #     - name: Build, tag, and push main service
-  #       id: build-image
-  #       env:
-  #         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-  #         REPOSITORY: canvas-app
-  #       run: |
-  #         docker compose build app
-  #         docker tag canvas-app:latest $ECR_REGISTRY/canvas-app:latest
-  #         docker push $ECR_REGISTRY/canvas-app:latest
+      - name: Build, tag, and push main service
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: canvas-app
+        run: |
+          docker compose build app
+          docker tag canvas-app:latest $ECR_REGISTRY/canvas-app:latest
+          docker push $ECR_REGISTRY/canvas-app:latest
 
   deploy-fargate:
-    needs: create-ecr
-    # needs: docker-deploy
+    # needs: create-ecr
+    needs: docker-deploy
     name: Deploy to Fargate
     runs-on: ubuntu-latest
     environment: production

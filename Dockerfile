@@ -171,6 +171,6 @@ RUN pip3 install lxml --break-system-packages
 
 USER ${CANVAS_USER}
 
-EXPOSE 3000
+EXPOSE 80
 
-CMD [ "bundle", "exec", "rails", "server", "-b", "0.0.0.0" ]
+CMD [ "bundle", "exec", "rails", "server", "-p", "80", "-b", "0.0.0.0" ]
