@@ -3,6 +3,10 @@ Parameters:
     Type: String
     Description: "URI of the ECR repository"
     Default: "580472969326.dkr.ecr.us-west-1.amazonaws.com/canvas-app"
+  CanvasSecretManagerARN:
+    Type: String
+    Description: "Secrets ARN"
+    Default: "arn:aws:secretsmanager:us-west-1:580472969326:secret:PROD_HSF_CANVAS-mpLMvv"
 
 Resources:
   CanvasVPC:
