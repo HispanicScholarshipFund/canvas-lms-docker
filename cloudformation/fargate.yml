@@ -303,7 +303,7 @@ Resources:
               awslogs-region: !Ref "AWS::Region"
           Name: web
           PortMappings:
-            - ContainerPort: 80
+            - ContainerPort: 3000
               Protocol: tcp
           Secrets:
             - Name: EMAIL_DOMAIN
@@ -375,7 +375,7 @@ Resources:
       ContainerDefinitions:
         - Essential: true
           Image: !Sub "${CanvasAppECRRepositoryUri}:latest"
-          # Command: ["bundle", "exec", "script/delayed_job", "run"]
+          Command: ["bundle", "exec", "script/delayed_job", "run"]
           LogConfiguration:
             LogDriver: awslogs
             Options:
