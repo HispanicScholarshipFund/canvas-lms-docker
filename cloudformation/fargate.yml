@@ -304,7 +304,7 @@ Resources:
           Name: web
           PortMappings:
             - ContainerPort: 3000
-              HostPort: 80
+              # HostPort: 80
               Protocol: tcp
           Secrets:
             - Name: EMAIL_DOMAIN
@@ -505,7 +505,7 @@ Resources:
       LaunchType: FARGATE
       LoadBalancers:
         - ContainerName: web
-          ContainerPort: 80
+          ContainerPort: 3000
           # HostPort: 80
           TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
       NetworkConfiguration:
