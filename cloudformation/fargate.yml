@@ -242,9 +242,9 @@ Resources:
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
           Description: Allow from anyone on port 80
-          FromPort: 3000
+          FromPort: 80
           IpProtocol: tcp
-          ToPort: 3000
+          ToPort: 80
       VpcId: !Ref CanvasVPC
   CanvasServiceLBSecurityGrouptoCanvasStackCanvasServiceSecurityGroup:
     Type: "AWS::EC2::SecurityGroupEgress"
@@ -257,8 +257,9 @@ Resources:
       DestinationSecurityGroupId: !GetAtt
         - CanvasServiceSecurityGroup
         - GroupId
-      FromPort: 3000
-      ToPort: 3000
+      FromPort: 80
+      ToPort: 80
+
   CanvasServiceLBPublicListener:
     Type: "AWS::ElasticLoadBalancingV2::Listener"
     Properties:
@@ -266,8 +267,9 @@ Resources:
         - TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
           Type: forward
       LoadBalancerArn: !Ref CanvasServiceLB
-      Port: 3000
+      Port: 80
       Protocol: HTTP
+
   CanvasServiceLBPublicListenerECSGroup:
     Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
     Properties:
@@ -278,6 +280,7 @@ Resources:
           Value: "false"
       TargetType: ip
       VpcId: !Ref CanvasVPC
+
   CanvasServiceTaskDefTaskRole:
     Type: "AWS::IAM::Role"
     Properties:
@@ -563,14 +566,14 @@ Resources:
     Properties:
       IpProtocol: tcp
       Description: Load balancer to target
-      FromPort: 3000
+      FromPort: 80
       GroupId: !GetAtt
         - CanvasServiceSecurityGroup
         - GroupId
       SourceSecurityGroupId: !GetAtt
         - CanvasServiceLBSecurityGroup
         - GroupId
-      ToPort: 3000
+      ToPort: 80
   CanvasAPI:
     Type: "AWS::ApiGatewayV2::Api"
     Properties:
