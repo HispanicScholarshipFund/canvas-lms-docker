@@ -357,9 +357,6 @@ Resources:
               ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_S3_BUCKET::"
             - Name: TZ
               ValueFrom: !Sub "${CanvasSecretManagerARN}:TZ::"
-            - Name: RAILS_ENV
-              ValueFrom: "production"
-
       Cpu: "4096"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
@@ -440,8 +437,6 @@ Resources:
               ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_S3_BUCKET::"
             - Name: TZ
               ValueFrom: !Sub "${CanvasSecretManagerARN}:TZ::"
-            - Name: RAILS_ENV
-              ValueForm: "production"
       Cpu: "4096"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
