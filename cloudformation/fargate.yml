@@ -505,8 +505,8 @@ Resources:
       LaunchType: FARGATE
       LoadBalancers:
         - ContainerName: web
-          ContainerPort: 3000
-          HostPort: 80
+          ContainerPort: 80
+          # HostPort: 80
           TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
       NetworkConfiguration:
         AwsvpcConfiguration:
