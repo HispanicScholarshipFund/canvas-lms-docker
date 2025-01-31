@@ -358,7 +358,7 @@ Resources:
             - Name: TZ
               ValueFrom: !Sub "${CanvasSecretManagerARN}:TZ::"
             - Name: RAILS_ENV
-              Value: production
+              ValueFrom: "production"
 
       Cpu: "4096"
       ExecutionRoleArn: !GetAtt
@@ -441,7 +441,7 @@ Resources:
             - Name: TZ
               ValueFrom: !Sub "${CanvasSecretManagerARN}:TZ::"
             - Name: RAILS_ENV
-              Value: production
+              ValueForm: "production"
       Cpu: "4096"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
