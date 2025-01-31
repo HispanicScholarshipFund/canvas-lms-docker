@@ -302,9 +302,10 @@ Resources:
               awslogs-stream-prefix: CanvasService
               awslogs-region: !Ref "AWS::Region"
           Name: web
-          PortMappings:
-            - ContainerPort: 80
-              Protocol: tcp
+          # PortMappings:
+          #   - ContainerPort: 80
+          #     Protocol: tcp
+
           # Secrets:
           #   - Name: EMAIL_DOMAIN
           #     ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_DOMAIN"
@@ -468,7 +469,7 @@ Resources:
         Version: 2012-10-17
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-        # - "arn:aws:iam::aws:policy/service-role/SecretsManagerReadWrite"
+        - "arn:aws:iam::aws:policy/service-role/SecretsManagerReadWrite"
 
   CanvasServiceTaskDefExecutionRoleDefaultPolicy:
     Type: "AWS::IAM::Policy"
@@ -514,10 +515,10 @@ Resources:
       EnableECSManagedTags: false
       HealthCheckGracePeriodSeconds: 60
       LaunchType: FARGATE
-      LoadBalancers:
-        - ContainerName: web
-          ContainerPort: 80
-          TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
+      # LoadBalancers:
+      #   - ContainerName: web
+      #     ContainerPort: 80
+      #     TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: DISABLED
