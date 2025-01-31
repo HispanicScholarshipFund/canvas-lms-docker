@@ -304,7 +304,6 @@ Resources:
           Name: web
           PortMappings:
             - ContainerPort: 3000
-              HostPort: 80
               Protocol: tcp
           Secrets:
             - Name: EMAIL_DOMAIN
