@@ -307,7 +307,7 @@ Resources:
           #     Protocol: tcp
           Secrets:
             - Name: EMAIL_DOMAIN
-              ValueFrom: "arn:aws:secretsmanager:us-west-1:580472969326:secret:PROD_HSF_CANVAS-mpLMvv:EMAIL_DOMAIN::"
+              ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_DOMAIN::"
       Cpu: "512"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
