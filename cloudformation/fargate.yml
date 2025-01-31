@@ -366,28 +366,19 @@ Resources:
         Version: 2012-10-17
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-        - "arn:aws:iam::aws:policy/service-role/SecretsManagerReadWrite"
 
   CanvasServiceTaskDefExecutionRoleDefaultPolicy:
     Type: "AWS::IAM::Policy"
     Properties:
       PolicyDocument:
         Statement:
-          # - Action:
-          #     - "ecr:BatchGetImage"
-          #     - "ecr:BatchCheckLayerAvailability"
-          #     - "ecr:GetAuthorizationToken"
-          #     - "ecr:GetDownloadUrlForLayer"
-          #     - "ecr:DescribeRepositories"
-          #     - "ecr:GetRepositoryPolicy"
-          #     - "ecr:ListImages"
-          #     - "ecr:DescribeImages"
-          #     - "ecr:ListTagsForResource"
-          #     - "ecr:DescribeImageScanFindings"
-          #     - "ecr:GetLifecyclePolicy"
-          #     - "ecr:GetLifecyclePolicyPreview"
-          #   Resource: "*"
-          #   Effect: Allow
+          - Action:
+              - "secretsmanager:GetSecretValue"
+              - "secretsmanager:DescribeSecret"
+              - "secretsmanager:BatchGetSecretValue"
+              - "secretsmanager:ListSecrets"
+            Resource: "*"
+            Effect: Allow
           - Action:
               - "logs:CreateLogStream"
               - "logs:PutLogEvents"
