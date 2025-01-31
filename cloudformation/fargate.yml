@@ -468,7 +468,7 @@ Resources:
         Version: 2012-10-17
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-          "arn:aws:iam::aws:policy/service-role/SecretsManagerReadWrite"
+        # - "arn:aws:iam::aws:policy/service-role/SecretsManagerReadWrite"
 
   CanvasServiceTaskDefExecutionRoleDefaultPolicy:
     Type: "AWS::IAM::Policy"
