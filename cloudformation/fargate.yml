@@ -259,6 +259,7 @@ Resources:
         - GroupId
       FromPort: 80
       ToPort: 80
+
   CanvasServiceLBPublicListener:
     Type: "AWS::ElasticLoadBalancingV2::Listener"
     Properties:
@@ -268,10 +269,11 @@ Resources:
       LoadBalancerArn: !Ref CanvasServiceLB
       Port: 80
       Protocol: HTTP
+
   CanvasServiceLBPublicListenerECSGroup:
     Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
     Properties:
-      Port: 80
+      Port: 3000
       Protocol: HTTP
       TargetGroupAttributes:
         - Key: stickiness.enabled
