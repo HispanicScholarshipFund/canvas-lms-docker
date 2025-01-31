@@ -312,6 +312,10 @@ Resources:
               ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_HOST_USER::"
             - Name: EMAIL_HOST_PASSWORD
               ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_HOST_PASSWORD::"
+            - Name: EMAIL_PORT
+              ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_PORT::"
+            - Name: EMAIL_HOST
+              ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_HOST::"
             - Name: EMAIL_SENDER_ADDRESS
               ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_SENDER_ADDRESS::"
             - Name: EMAIL_SENDER_NAME
@@ -350,8 +354,7 @@ Resources:
               ValueFrom: !Sub "${CanvasSecretManagerARN}:AWS_S3_BUCKET::"
             - Name: TZ
               ValueFrom: !Sub "${CanvasSecretManagerARN}:TZ::"
-            - Name: EMAIL_PORT
-              ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_PORT::"
+
       Cpu: "512"
       ExecutionRoleArn: !GetAtt
         - CanvasServiceTaskDefExecutionRole
