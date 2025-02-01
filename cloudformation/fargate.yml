@@ -339,6 +339,8 @@ Resources:
               ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_PORT::"
             - Name: DB_DRIVER
               ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_DRIVER::"
+            - Name: DB_NAME
+              ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_NAME::"
             - Name: DB_PASSWORD
               ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_PASSWORD::"
             - Name: DB_HOST
@@ -422,6 +424,8 @@ Resources:
               ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_PORT::"
             - Name: DB_DRIVER
               ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_DRIVER::"
+            - Name: DB_NAME
+              ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_NAME::"
             - Name: DB_PASSWORD
               ValueFrom: !Sub "${CanvasSecretManagerARN}:DB_PASSWORD::"
             - Name: DB_HOST
