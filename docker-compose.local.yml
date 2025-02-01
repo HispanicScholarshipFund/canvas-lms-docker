@@ -3,8 +3,9 @@ services:
     build:
       context: .
     ports:
-      - 80:3000
+      - 80:80
     environment:
+      # RAILS_ENV: production
       CANVAS_LMS_DOMAIN: ${CANVAS_LMS_DOMAIN}
       CANVAS_LMS_ADMIN_EMAIL: ${CANVAS_LMS_ADMIN_EMAIL}
       CANVAS_LMS_ADMIN_PASSWORD: ${CANVAS_LMS_ADMIN_PASSWORD}
@@ -55,6 +56,7 @@ services:
     # volumes:
     #   - app-volume:/opt/canvas/tmp/files
     environment:
+      # RAILS_ENV: production
       CANVAS_LMS_DOMAIN: ${CANVAS_LMS_DOMAIN}
       CANVAS_LMS_ADMIN_EMAIL: ${CANVAS_LMS_ADMIN_EMAIL}
       CANVAS_LMS_ADMIN_PASSWORD: ${CANVAS_LMS_ADMIN_PASSWORD}
