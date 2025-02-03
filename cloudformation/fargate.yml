@@ -242,9 +242,9 @@ Resources:
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
           Description: Allow from anyone on port 80
-          FromPort: 80
+          FromPort: 3001
           IpProtocol: tcp
-          ToPort: 80
+          ToPort: 3001
       VpcId: !Ref CanvasVPC
   CanvasServiceLBSecurityGrouptoCanvasStackCanvasServiceSecurityGroup:
     Type: "AWS::EC2::SecurityGroupEgress"
@@ -257,8 +257,8 @@ Resources:
       DestinationSecurityGroupId: !GetAtt
         - CanvasServiceSecurityGroup
         - GroupId
-      FromPort: 80
-      ToPort: 80
+      FromPort: 3001
+      ToPort: 3001
 
   CanvasServiceLBPublicListener:
     Type: "AWS::ElasticLoadBalancingV2::Listener"
@@ -267,7 +267,7 @@ Resources:
         - TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
           Type: forward
       LoadBalancerArn: !Ref CanvasServiceLB
-      Port: 80
+      Port: 3001
       Protocol: HTTP
 
   CanvasServiceLBPublicListenerECSGroup:
@@ -305,9 +305,9 @@ Resources:
               awslogs-stream-prefix: CanvasService
               awslogs-region: !Ref "AWS::Region"
           Name: web
-          PortMappings:
-            - ContainerPort: 3001
-              Protocol: tcp
+          # PortMappings:
+          #   - ContainerPort: 3001
+          #     Protocol: tcp
           Secrets:
             - Name: EMAIL_DOMAIN
               ValueFrom: !Sub "${CanvasSecretManagerARN}:EMAIL_DOMAIN::"
