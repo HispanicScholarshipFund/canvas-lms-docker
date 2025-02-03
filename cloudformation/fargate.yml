@@ -513,10 +513,10 @@ Resources:
       EnableECSManagedTags: false
       HealthCheckGracePeriodSeconds: 60
       LaunchType: FARGATE
-      LoadBalancers:
-        - ContainerName: web
-          ContainerPort: 3001
-          TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
+      # LoadBalancers:
+      #   - ContainerName: web
+      #     ContainerPort: 80
+      #     TargetGroupArn: !Ref CanvasServiceLBPublicListenerECSGroup
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: DISABLED
@@ -524,15 +524,9 @@ Resources:
             - !GetAtt
               - CanvasServiceSecurityGroup
               - GroupId
-            - sg-021801454abe899ac
           Subnets:
-            - subnet-0b8e2da655e9b0620
-            - subnet-0879f897f2367c6fd
-            - subnet-0c8171e7bcfcd162a
-            - subnet-0da7e20a1205ebe0b
-            - subnet-0a5539d69f218ef7c
-            - subnet-07171a7cdc0b25505
-            - subnet-0dc02f09d9b35003a
+            - !Ref CanvasVPCPrivateSubnet1Subnet
+            - !Ref CanvasVPCPrivateSubnet2Subnet
       TaskDefinition: !Ref CanvasServiceTaskDef
     DependsOn:
       - CanvasServiceLBPublicListenerECSGroup
