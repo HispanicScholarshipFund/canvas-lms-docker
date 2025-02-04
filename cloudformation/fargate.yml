@@ -612,6 +612,7 @@ Resources:
     Properties:
       Name: canvas-api
       ProtocolType: HTTP
+
   CanvasAPIANYproxylistener:
     Type: "AWS::ApiGatewayV2::Integration"
     Properties:
@@ -622,6 +623,7 @@ Resources:
       IntegrationMethod: ANY
       IntegrationUri: !Ref CanvasServiceLBPublicListener
       PayloadFormatVersion: "1.0"
+
   CanvasAPIANYproxy:
     Type: "AWS::ApiGatewayV2::Route"
     Properties:
@@ -632,6 +634,7 @@ Resources:
         - ""
         - - integrations/
           - !Ref CanvasAPIANYproxylistener
+
   CanvasAPIVpcLink:
     Type: "AWS::ApiGatewayV2::VpcLink"
     Properties:
@@ -640,6 +643,7 @@ Resources:
         - !Ref CanvasVPCPrivateSubnet1Subnet
         - !Ref CanvasVPCPrivateSubnet2Subnet
       SecurityGroupIds: []
+
   CanvasLogGroup:
     Type: "AWS::Logs::LogGroup"
     Properties:

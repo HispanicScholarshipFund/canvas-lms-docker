@@ -3,7 +3,7 @@ services:
     build:
       context: .
     ports:
-      - 80:80
+      - 80:3001
     environment:
       # RAILS_ENV: production
       CANVAS_LMS_DOMAIN: ${CANVAS_LMS_DOMAIN}

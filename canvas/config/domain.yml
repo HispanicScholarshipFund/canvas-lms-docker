@@ -1,5 +1,5 @@
-default: &default
-  domain: <%= ENV.fetch('CANVAS_LMS_DOMAIN') %>
+default: &default # domain: <%= ENV.fetch('CANVAS_LMS_DOMAIN') %>
+
 
 production:
   <<: *default
