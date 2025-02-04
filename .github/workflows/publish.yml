@@ -35,7 +35,7 @@ jobs:
   #         no-fail-on-empty-changeset: "1"
 
   docker-deploy:
-    needs: create-ecr
+    # needs: create-ecr
     name: Docker deploy
     runs-on: ubuntu-latest
     environment: production
